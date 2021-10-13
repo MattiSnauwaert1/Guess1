@@ -79318,11 +79318,13 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
       this.WebButton1 = null;
       this.WebLabel1 = null;
       this.WebDBGrid1 = null;
+      this.WebButton2 = null;
     };
     this.$final = function () {
       this.WebButton1 = undefined;
       this.WebLabel1 = undefined;
       this.WebDBGrid1 = undefined;
+      this.WebButton2 = undefined;
       pas["WEBLib.Forms"].TForm.$final.call(this);
     };
     this.WebButton1Click = function (Sender) {
@@ -79345,96 +79347,145 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
        else this.WebDBGrid1.FColumns.GetItem$1(ACol).SetSortIndicator(pas["WEBLib.DBCtrls"].TGridSortIndicator.siAscending);
       pas.Unit1.Form1.IndexedDBClientDataSet.Refresh$2();
     };
+    this.WebButton2Click = function (Sender) {
+      var myChart = document.getElementById('myChart').getContext('2d');
+      
+          var massPopChart = new Chart(myChart, {
+              type : 'bar', //type chart
+              data : {
+                labels:['Jupiler', 'Stella Artois', 'Karmeliet', 'Bavik', 'Duvel'],
+                datasets:[{
+                  label : 'Drinks',
+                  data : [
+                    500,
+                    482,
+                    146,
+                    400,
+                    250
+                  ]
+                }]
+              },
+              options : {}
+          });
+    };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
       this.WebLabel1 = pas["WEBLib.StdCtrls"].TLabel.$create("Create$1",[this]);
       this.WebButton1 = pas["WEBLib.StdCtrls"].TButton.$create("Create$2",["btnExit"]);
       this.WebDBGrid1 = pas["WEBLib.DBCtrls"].TDBGrid.$create("Create$2",["grid"]);
+      this.WebButton2 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebLabel1.BeforeLoadDFMValues();
       this.WebButton1.BeforeLoadDFMValues();
       this.WebDBGrid1.BeforeLoadDFMValues();
+      this.WebButton2.BeforeLoadDFMValues();
       try {
         this.SetName("Form3");
-        this.SetLeft(0);
-        this.SetTop(0);
         this.SetCaption("Form3");
         this.SetColor(16777215);
         this.FFont.FCharset = 0;
         this.FFont.SetColor(0);
-        this.FFont.SetHeight(-11);
+        this.FFont.SetHeight(0);
         this.FFont.SetName("Arial");
+        this.FFont.SetSize(8);
         this.FFont.SetStyle({});
+        this.SetFormContainer("body");
+        this.SetFormStyle(pas["WEBLib.Forms"].TFormStyle.fsNormal);
+        this.SetHeight(608);
+        this.SetLeft(0);
+        this.SetTabOrder(0);
+        this.SetTop(0);
+        this.SetWidth(760);
         this.WebLabel1.SetParentComponent(this);
         this.WebLabel1.SetName("WebLabel1");
-        this.WebLabel1.SetLeft(32);
-        this.WebLabel1.SetTop(88);
-        this.WebLabel1.SetWidth(3);
-        this.WebLabel1.SetHeight(14);
+        this.WebLabel1.SetCaption("WebLabel1");
+        this.WebLabel1.SetChildOrderEx(0);
+        this.WebLabel1.SetDragMode(pas["WEBLib.Controls"].TDragMode.dmManual);
         this.WebLabel1.FFont.FCharset = 0;
         this.WebLabel1.FFont.SetColor(0);
         this.WebLabel1.FFont.SetHeight(-11);
         this.WebLabel1.FFont.SetName("Arial");
+        this.WebLabel1.FFont.SetSize(8);
         this.WebLabel1.FFont.SetStyle({});
-        this.WebLabel1.SetHeightPercent(100.000000000000000000);
+        this.WebLabel1.SetHeight(14);
+        this.WebLabel1.SetLeft(32);
         this.WebLabel1.SetParentFont(false);
-        this.WebLabel1.SetWidthPercent(100.000000000000000000);
+        this.WebLabel1.FTextDirection = pas["WEBLib.Controls"].TTextDirection.tdDefault;
+        this.WebLabel1.SetTop(88);
+        this.WebLabel1.SetWidth(3);
         this.WebButton1.SetParentComponent(this);
         this.WebButton1.SetName("WebButton1");
-        this.WebButton1.SetLeft(192);
-        this.WebButton1.SetTop(448);
-        this.WebButton1.SetWidth(60);
-        this.WebButton1.SetHeight(21);
         this.WebButton1.SetCaption("Try again");
         this.WebButton1.SetChildOrderEx(2);
+        this.WebButton1.SetColor(-1);
+        this.WebButton1.SetDefault(false);
+        this.WebButton1.SetDragMode(pas["WEBLib.Controls"].TDragMode.dmManual);
         this.WebButton1.SetElementClassName("btn btn-warning");
         this.WebButton1.SetElementPosition(pas["WEBLib.Controls"].TElementPosition.epRelative);
         this.WebButton1.FFont.FCharset = 0;
         this.WebButton1.FFont.SetColor(0);
         this.WebButton1.FFont.SetHeight(-11);
         this.WebButton1.FFont.SetName("Arial");
+        this.WebButton1.FFont.SetSize(8);
         this.WebButton1.FFont.SetStyle({});
+        this.WebButton1.SetHeight(21);
         this.WebButton1.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
-        this.WebButton1.SetHeightPercent(100.000000000000000000);
+        this.WebButton1.SetLeft(192);
+        this.SetEvent$1(this.WebButton1,this,"OnClick","WebButton1Click");
         this.WebButton1.SetParentFont(false);
         this.WebButton1.SetRole("button");
+        this.WebButton1.SetTabOrder(0);
+        this.WebButton1.FTextDirection = pas["WEBLib.Controls"].TTextDirection.tdDefault;
+        this.WebButton1.SetTop(448);
+        this.WebButton1.SetWidth(60);
+        this.WebButton1.SetWidthPercent(10);
         this.WebButton1.SetWidthStyle(pas["WEBLib.Controls"].TSizeStyle.ssPercent);
-        this.WebButton1.SetWidthPercent(10.000000000000000000);
-        this.SetEvent$1(this.WebButton1,this,"OnClick","WebButton1Click");
         this.WebDBGrid1.SetParentComponent(this);
         this.WebDBGrid1.SetName("WebDBGrid1");
+        this.WebDBGrid1.SetDataSource(pas.Unit1.Form1.WebDataSource1);
+        this.WebDBGrid1.SetDefaultRowHeight(22);
+        this.WebDBGrid1.SetDragMode(pas["WEBLib.Controls"].TDragMode.dmManual);
+        this.WebDBGrid1.SetElementClassName("from-control");
+        this.WebDBGrid1.FFont.FCharset = 0;
+        this.WebDBGrid1.FFont.SetColor(0);
+        this.WebDBGrid1.FFont.SetHeight(0);
+        this.WebDBGrid1.FFont.SetName("Arial");
+        this.WebDBGrid1.FFont.SetSize(8);
+        this.WebDBGrid1.FFont.SetStyle({});
+        this.WebDBGrid1.SetHeight(321);
         this.WebDBGrid1.SetLeft(128);
+        this.SetEvent$1(this.WebDBGrid1,this,"OnFixedCellClick","WebDBGrid1FixedCellClick");
+        this.WebDBGrid1.FOptions = rtl.createSet(pas["WEBLib.Grids"].TGridOption.goVertLine,pas["WEBLib.Grids"].TGridOption.goHorzLine,pas["WEBLib.Grids"].TGridOption.goRangeSelect);
+        this.WebDBGrid1.SetShowIndicator(true);
+        this.WebDBGrid1.FStyleElements = {};
+        this.WebDBGrid1.SetTabOrder(1);
         this.WebDBGrid1.SetTop(48);
         this.WebDBGrid1.SetWidth(473);
-        this.WebDBGrid1.SetHeight(321);
-        this.WebDBGrid1.FColumns.Clear();
-        var $with = this.WebDBGrid1.FColumns.Add$1();
-        $with.SetDataField("High_Score");
-        $with.SetTitle("High Score");
-        var $with1 = this.WebDBGrid1.FColumns.Add$1();
-        $with1.SetDataField("First_Name");
-        $with1.SetTitle("First Name");
-        var $with2 = this.WebDBGrid1.FColumns.Add$1();
-        $with2.SetDataField("Last_Name");
-        $with2.SetTitle("Last Name");
-        var $with3 = this.WebDBGrid1.FColumns.Add$1();
-        $with3.SetDataField("Date_Now");
-        $with3.SetTitle("Date");
-        this.WebDBGrid1.SetDataSource(pas.Unit1.Form1.WebDataSource1);
-        this.WebDBGrid1.SetElementClassName("from-control");
-        this.WebDBGrid1.SetFixedCols(1);
-        this.WebDBGrid1.SetTabOrder(1);
-        this.WebDBGrid1.SetHeightPercent(100.000000000000000000);
-        this.WebDBGrid1.SetWidthPercent(100.000000000000000000);
-        this.SetEvent$1(this.WebDBGrid1,this,"OnFixedCellClick","WebDBGrid1FixedCellClick");
-        this.WebDBGrid1.SetColWidths(0,24);
-        this.WebDBGrid1.SetColWidths(1,64);
-        this.WebDBGrid1.SetColWidths(2,64);
-        this.WebDBGrid1.SetColWidths(3,64);
-        this.WebDBGrid1.SetColWidths(4,64);
+        this.WebButton2.SetParentComponent(this);
+        this.WebButton2.SetName("WebButton2");
+        this.WebButton2.SetCaption("Visualise");
+        this.WebButton2.SetChildOrderEx(0);
+        this.WebButton2.SetColor(-1);
+        this.WebButton2.SetDefault(false);
+        this.WebButton2.SetDragMode(pas["WEBLib.Controls"].TDragMode.dmManual);
+        this.WebButton2.FFont.FCharset = 0;
+        this.WebButton2.FFont.SetColor(0);
+        this.WebButton2.FFont.SetHeight(0);
+        this.WebButton2.FFont.SetName("Arial");
+        this.WebButton2.FFont.SetSize(8);
+        this.WebButton2.FFont.SetStyle({});
+        this.WebButton2.SetHeight(25);
+        this.WebButton2.SetLeft(120);
+        this.SetEvent$1(this.WebButton2,this,"OnClick","WebButton2Click");
+        this.WebButton2.SetRole("button");
+        this.WebButton2.SetTabOrder(0);
+        this.WebButton2.FTextDirection = pas["WEBLib.Controls"].TTextDirection.tdDefault;
+        this.WebButton2.SetTop(518);
+        this.WebButton2.SetWidth(100);
       } finally {
         this.WebLabel1.AfterLoadDFMValues();
         this.WebButton1.AfterLoadDFMValues();
         this.WebDBGrid1.AfterLoadDFMValues();
+        this.WebButton2.AfterLoadDFMValues();
       };
     };
     rtl.addIntf(this,pas.System.IUnknown);
@@ -79442,8 +79493,10 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
     $r.addField("WebButton1",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addField("WebLabel1",pas["WEBLib.StdCtrls"].$rtti["TLabel"]);
     $r.addField("WebDBGrid1",pas["WEBLib.DBCtrls"].$rtti["TDBGrid"]);
+    $r.addField("WebButton2",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addMethod("WebButton1Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("WebDBGrid1FixedCellClick",0,[["Sender",pas.System.$rtti["TObject"]],["ACol",rtl.longint],["ARow",rtl.longint]]);
+    $r.addMethod("WebButton2Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
   });
   this.Form3 = null;
 },["Unit1"]);

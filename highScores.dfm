@@ -1,39 +1,42 @@
 object Form3: TForm3
-  Left = 0
-  Top = 0
   Caption = 'Form3'
-  ClientHeight = 561
-  ClientWidth = 672
   Color = clWhite
   Font.Charset = ANSI_CHARSET
   Font.Color = clBlack
-  Font.Height = -11
+  Font.Height = 0
   Font.Name = 'Arial'
+  Font.Size = 8
   Font.Style = []
-  OldCreateOrder = True
-  PixelsPerInch = 96
-  TextHeight = 14
+  FormContainer = 'body'
+  FormStyle = fsNormal
+  Height = 608
+  Left = 0
+  TabOrder = 0
+  Top = 0
+  Width = 760
   object WebLabel1: TWebLabel
-    Left = 32
-    Top = 88
-    Width = 3
-    Height = 14
+    Caption = 'WebLabel1'
+    ChildOrder = 0
+    DragMode = dmManual
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'Arial'
+    Font.Size = 8
     Font.Style = []
-    HeightPercent = 100.000000000000000000
+    Height = 14
+    Left = 32
     ParentFont = False
-    WidthPercent = 100.000000000000000000
+    TextDirection = tdDefault
+    Top = 88
+    Width = 3
   end
   object WebButton1: TWebButton
-    Left = 192
-    Top = 448
-    Width = 60
-    Height = 21
     Caption = 'Try again'
     ChildOrder = 2
+    Color = clNone
+    Default = False
+    DragMode = dmManual
     ElementClassName = 'btn btn-warning'
     ElementID = 'btnExit'
     ElementPosition = epRelative
@@ -41,50 +44,63 @@ object Form3: TForm3
     Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'Arial'
+    Font.Size = 8
     Font.Style = []
+    Height = 21
     HeightStyle = ssAuto
-    HeightPercent = 100.000000000000000000
+    Left = 192
+    OnClick = WebButton1Click
     ParentFont = False
     Role = 'button'
+    TabOrder = 0
+    TextDirection = tdDefault
+    Top = 448
+    Width = 60
+    WidthPercent = 10
     WidthStyle = ssPercent
-    WidthPercent = 10.000000000000000000
-    OnClick = WebButton1Click
   end
   object WebDBGrid1: TWebDBGrid
+    Columns = <>
+    DataSource = Form1.WebDataSource1
+    DefaultRowHeight = 22
+    DragMode = dmManual
+    ElementClassName = 'from-control'
+    ElementID = 'grid'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = 0
+    Font.Name = 'Arial'
+    Font.Size = 8
+    Font.Style = []
+    Height = 321
     Left = 128
+    OnFixedCellClick = WebDBGrid1FixedCellClick
+    Options = [goVertLine,goHorzLine,goRangeSelect]
+    ShowIndicator = True
+    StyleElements = []
+    TabOrder = 1
     Top = 48
     Width = 473
-    Height = 321
-    Columns = <
-      item
-        DataField = 'High_Score'
-        Title = 'High Score'
-      end
-      item
-        DataField = 'First_Name'
-        Title = 'First Name'
-      end
-      item
-        DataField = 'Last_Name'
-        Title = 'Last Name'
-      end
-      item
-        DataField = 'Date_Now'
-        Title = 'Date'
-      end>
-    DataSource = Form1.WebDataSource1
-    ElementClassName = 'from-control'
-    ElementId = 'grid'
-    FixedCols = 1
-    TabOrder = 1
-    HeightPercent = 100.000000000000000000
-    WidthPercent = 100.000000000000000000
-    OnFixedCellClick = WebDBGrid1FixedCellClick
-    ColWidths = (
-      24
-      64
-      64
-      64
-      64)
+  end
+  object WebButton2: TWebButton
+    Caption = 'Visualise'
+    ChildOrder = 0
+    Color = clNone
+    Default = False
+    DragMode = dmManual
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = 0
+    Font.Name = 'Arial'
+    Font.Size = 8
+    Font.Style = []
+    Height = 25
+    Left = 120
+    OnClick = WebButton2Click
+    Role = 'button'
+    TabOrder = 0
+    TextDirection = tdDefault
+    Top = 518
+    Width = 100
   end
 end

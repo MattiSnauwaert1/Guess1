@@ -12,11 +12,13 @@ type
     WebButton1: TWebButton;
     WebLabel1: TWebLabel;
     WebDBGrid1: TWebDBGrid;
+    WebButton2: TWebButton;
     procedure WebButton1Click(Sender: TObject);
     procedure WebDBGrid1FixedCellClick(Sender: TObject; ACol, ARow: Integer);
 
 
 
+    procedure WebButton2Click(Sender: TObject);
   private
     { Public declarations }
   public
@@ -63,5 +65,33 @@ var
 
     Form1.IndexedDBClientDataSet.Refresh;
 end;
+
+procedure TForm3.WebButton2Click(Sender: TObject);
+begin
+    asm
+      var myChart = document.getElementById('myChart').getContext('2d');
+    
+        var massPopChart = new Chart(myChart, {
+            type : 'bar', //type chart
+            data : {
+              labels:['Jupiler', 'Stella Artois', 'Karmeliet', 'Bavik', 'Duvel'],
+              datasets:[{
+                label : 'Drinks',
+                data : [
+                  500,
+                  482,
+                  146,
+                  400,
+                  250
+                ]
+              }]
+            },
+            options : {}
+        });
+    end;
+end;
+
+
+
 end.
-     
+      
