@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>TMS Web Project</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#"> Guess Game</a>
+          <a class="navbar-brand" href="#">Login</a>
+
+
+          </div>
+        </nav>
+        </header>
+
+        <br/>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <span type="Text" id="lblWelcome" class="col-md-4 text-md-right"></span>
+                </div>
+                <div class="col-md-3">
+                     <input type="text" id="editFirstName" class="form-control">
+                </div>
+                <div class="col-md-3">
+                     <input type="text" id="editLastName" class="form-control">
+                </div>
+            </div>
+        </div>
+        <br/>
+
+
+<div class="container">
+<div class="row">
+ <div class="col-md-8">
+ <div class="login-form">
+   <div class="cotainer">
+       <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Guess Game</div>
+                    <div class="card-body">
+                        <form action="" method="">
+                            <div class="form-group row">
+                                <span type="Text" id="lblGenerateNumber" class="col-md-4 col-form-label text-md-right"></span>
+                                <div class="col-md-6">
+                                    <input type="text" id="inputGeneratedNumber" class="form-control">
+                                </div>
+                            </div>
+
+                             <div class="form-group row">
+
+                                <div class="col-md-6">
+                                    <button type="BUTTON" id="btnGenerateNumber"></button>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="form-group row">
+                                <span type="Text" id="lblWriteNumber" class="col-md-4 col-form-label text-md-right"></span>
+                                <div class="col-md-6">
+                                    <input type="text" id="WriteNumber" class="form-control">
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            
+
+                            <div class="form-group row">
+
+                                <div class="col-md-6">
+                                    <button type="BUTTON" id="btnCheckNumbers"></button>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="form-group row">
+                                <span type="Text" id="lblResult" class="col-md-4 col-form-label text-md-right"></span>
+                                <div class="col-md-6">
+                                    <input  type="text" id="Result" class="form-control">
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="form-group row">
+                                <span type="Text" id="lblNumberOfTries" class="col-md-4 col-form-label text-md-right"></span>
+                                <div class="col-md-6">
+                                   <input type="text" id="NumberOfTries" class="form-control">
+                                </div>
+                            </div>
+
+                            <br/>
+
+                             <div class="form-group row">
+                            <div class="col-md-3">
+                                <button type="BUTTON" id="btnClose"></button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="BUTTON" id="btnSave"></button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="BUTTON" id="btnGoToScoreboard"></button>
+                            </div>
+                            </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+     <div class="col-md-2">
+      <div class="row justify-content-end">
+         <div class="card-header">Dank aan onze sponsers</div>
+            <div class="card-body">
+            <div class="content-align-center">
+            <img class="small" src="https://www.tmssoftware.com/site/img/logo_tms_software_small.png">
+            <br/>
+            <img class="small" src="https://racketsportservices.co.uk/wp-content/uploads/2018/12/SNAUWAERTlogo-Page-1.jpg" height="150" width="180">
+          </div>
+         </div>
+        </div>
+       </div>
+    </div>
+    </div>
+
+</div>
+</div>
+
+
+ <footer class="text-center text-lg-start bg-light text-muted fixed-bottom-auto">
+
+<section
+     <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Snauwaert NV.
+          </h6>
+          <p>
+            Welcome to my own very high tech guessing game using Object Pascal.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Delphi</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Object Pascal</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">C#</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Bootstrap</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Info</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Settings</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Orders</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Help</a>
+          </p>
+        </div>
+
+  </section>
+    <p class="text-center"> Copyright © Snauwaert Matti / 2021. All right reserved. </p>
+</footer>
+
+
+  </body>
+</html>

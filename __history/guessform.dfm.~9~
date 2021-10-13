@@ -1,0 +1,224 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 558
+  ClientWidth = 904
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object WebLabel2: TWebLabel
+    Left = 480
+    Top = 108
+    Width = 68
+    Height = 13
+    Caption = 'Welcome back'
+    Color = clBtnFace
+    ElementID = 'lblWelcome'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object WebLabel3: TWebLabel
+    Left = 256
+    Top = 175
+    Width = 139
+    Height = 13
+    Caption = 'Generate a random number :'
+    Color = clBtnFace
+    ElementID = 'lblGenerateNumber'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object WebLabel6: TWebLabel
+    Left = 256
+    Top = 244
+    Width = 78
+    Height = 13
+    Caption = 'Write a number:'
+    Color = clBtnFace
+    ElementID = 'lblWriteNumber'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object WebLabel5: TWebLabel
+    Left = 256
+    Top = 382
+    Width = 78
+    Height = 13
+    Caption = 'Number of tries:'
+    Color = clBtnFace
+    ElementID = 'lblNumberOfTries'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object WebLabel1: TWebLabel
+    Left = 256
+    Top = 336
+    Width = 34
+    Height = 13
+    Caption = 'Result:'
+    Color = clBtnFace
+    ElementID = 'lblResult'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object frm2Edit: TWebEdit
+    Left = 687
+    Top = 105
+    Width = 121
+    Height = 22
+    ChildOrder = 2
+    ElementClassName = 'form-control'
+    ElementID = 'editFirstName'
+    HeightPercent = 100.000000000000000000
+    ReadOnly = True
+    WidthPercent = 100.000000000000000000
+  end
+  object WebButton1: TWebButton
+    Left = 249
+    Top = 407
+    Width = 120
+    Height = 25
+    Caption = 'Close'
+    ChildOrder = 3
+    ElementClassName = 'btn btn-warning'
+    ElementID = 'btnClose'
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 15.000000000000000000
+    OnClick = WebButton1Click
+  end
+  object frm3Edit: TWebEdit
+    Left = 560
+    Top = 105
+    Width = 121
+    Height = 22
+    ChildOrder = 4
+    ElementClassName = 'form-control'
+    ElementID = 'editLastName'
+    HeightPercent = 100.000000000000000000
+    ReadOnly = True
+    WidthPercent = 100.000000000000000000
+  end
+  object btnRandomize: TWebButton
+    Left = 256
+    Top = 194
+    Width = 121
+    Height = 25
+    Caption = 'Randomize'
+    ChildOrder = 5
+    ElementClassName = 'btn btn-primary'
+    ElementID = 'btnGenerateNumber'
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = btnRandomizeClick
+  end
+  object RandomNr: TWebEdit
+    Left = 433
+    Top = 172
+    Width = 121
+    Height = 22
+    ChildOrder = 7
+    ElementClassName = 'form-control'
+    ElementID = 'inputGeneratedNumber'
+    HeightPercent = 100.000000000000000000
+    ReadOnly = True
+    WidthPercent = 100.000000000000000000
+  end
+  object NrOfTries: TWebEdit
+    Left = 433
+    Top = 379
+    Width = 121
+    Height = 22
+    ChildOrder = 10
+    ElementClassName = 'form-control'
+    ElementID = 'NumberOfTries'
+    HeightPercent = 100.000000000000000000
+    ReadOnly = True
+    WidthPercent = 100.000000000000000000
+  end
+  object InputNr: TWebEdit
+    Left = 433
+    Top = 241
+    Width = 121
+    Height = 22
+    ChildOrder = 12
+    EditType = weNumeric
+    ElementClassName = 'form-control'
+    ElementID = 'WriteNumber'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+  end
+  object CheckNumbers: TWebButton
+    Left = 256
+    Top = 282
+    Width = 121
+    Height = 25
+    Caption = 'Check Numbers'
+    ChildOrder = 13
+    ElementClassName = 'btn btn-primary'
+    ElementID = 'btnCheckNumbers'
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 15.000000000000000000
+    OnClick = CheckNumbersClick
+  end
+  object Result: TWebEdit
+    Left = 431
+    Top = 333
+    Width = 162
+    Height = 22
+    ChildOrder = 14
+    ElementClassName = 'form-control'
+    ElementID = 'Result'
+    HeightPercent = 100.000000000000000000
+    ReadOnly = True
+    WidthPercent = 100.000000000000000000
+  end
+  object WebButton2: TWebButton
+    Left = 477
+    Top = 407
+    Width = 96
+    Height = 25
+    Caption = 'High Scores'
+    ChildOrder = 15
+    ElementClassName = 'btn btn-primary'
+    ElementID = 'btnGoToScoreboard'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = WebButton2Click
+  end
+  object WebButton3: TWebButton
+    Left = 375
+    Top = 407
+    Width = 96
+    Height = 25
+    Caption = 'Save Score'
+    ChildOrder = 15
+    ElementClassName = 'btn btn-success'
+    ElementID = 'btnSave'
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = WebButton3Click
+  end
+  object IndexedDBClientDataSet: TWebIndexedDbClientDataset
+    IDBDatabaseName = 'scoreDB'
+    IDBObjectStoreName = 'highScoreList'
+    IDBKeyFieldName = 'id'
+    IDBAutoIncrement = True
+    Params = <>
+    Left = 536
+    Top = 472
+  end
+  object WebDataSource1: TWebDataSource
+    Left = 408
+    Top = 472
+  end
+end
