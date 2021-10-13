@@ -79348,20 +79348,22 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
       pas.Unit1.Form1.IndexedDBClientDataSet.Refresh$2();
     };
     this.WebButton2Click = function (Sender) {
+      var score = 0;
+      var firstName = "";
+      var lastName = "";
+      score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
+      firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
+      lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
       var myChart = document.getElementById('myChart').getContext('2d');
       
           var massPopChart = new Chart(myChart, {
               type : 'bar', //type chart
               data : {
-                labels:['Jupiler', 'Stella Artois', 'Karmeliet', 'Bavik', 'Duvel'],
+                labels:[firstName],
                 datasets:[{
-                  label : 'Drinks',
+                  label : 'Guesses',
                   data : [
-                    500,
-                    482,
-                    146,
-                    400,
-                    250
+                    score,
                   ]
                 }]
               },

@@ -16,6 +16,8 @@ type
     procedure WebButton1Click(Sender: TObject);
     procedure WebDBGrid1FixedCellClick(Sender: TObject; ACol, ARow: Integer);
 
+    
+
 
 
     procedure WebButton2Click(Sender: TObject);
@@ -67,27 +69,43 @@ var
 end;
 
 procedure TForm3.WebButton2Click(Sender: TObject);
+var 
+  score : Integer;
+  firstName : String;
+  lastName : String;
+  
 begin
+
+    
+    begin
+   
+
+         score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
+         firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
+         lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
+      
+
+
+    end;
+
     asm
+      
       var myChart = document.getElementById('myChart').getContext('2d');
     
         var massPopChart = new Chart(myChart, {
             type : 'bar', //type chart
             data : {
-              labels:['Jupiler', 'Stella Artois', 'Karmeliet', 'Bavik', 'Duvel'],
+              labels:[firstName],
               datasets:[{
-                label : 'Drinks',
+                label : 'Guesses',
                 data : [
-                  500,
-                  482,
-                  146,
-                  400,
-                  250
+                  score,
                 ]
               }]
             },
             options : {}
         });
+       
     end;
 end;
 
