@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 569
-  ClientWidth = 780
+  ClientHeight = 561
+  ClientWidth = 672
   Color = clWhite
   Font.Charset = ANSI_CHARSET
   Font.Color = clBlack
@@ -52,43 +52,36 @@ object Form3: TForm3
   end
   object WebDBGrid1: TWebDBGrid
     Left = 128
-    Top = 41
-    Width = 545
-    Height = 377
+    Top = 48
+    Width = 473
+    Height = 321
     Columns = <
       item
-        DataField = 'HighScore'
+        DataField = 'High_Score'
         Title = 'High Score'
       end
       item
-        DataField = 'FirstName'
-        Title = 'FirstName'
+        DataField = 'First_Name'
+        Title = 'First Name'
       end
       item
-        DataField = 'LastName'
+        DataField = 'Last_Name'
         Title = 'Last Name'
       end
       item
-        DataField = 'DateNow'
+        DataField = 'Date_Now'
         Title = 'Date'
       end>
     DataSource = Form1.WebDataSource1
-    ElementClassName = 'form-control'
+    ElementClassName = 'from-control'
     ElementId = 'grid'
-    FixedCols = 0
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Arial'
-    Font.Style = []
-    Options = [goVertLine, goHorzLine, goFixedRowDefAlign]
-    ParentFont = False
+    FixedCols = 1
     TabOrder = 1
     HeightPercent = 100.000000000000000000
-    StyleElements = []
     WidthPercent = 100.000000000000000000
     OnFixedCellClick = WebDBGrid1FixedCellClick
     ColWidths = (
+      24
       64
       64
       64

@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, JS, Web, WEBLib.Graphics, WEBLib.Controls,
   WEBLib.Forms, WEBLib.Dialogs, Data.DB, WEBLib.DB, WEBLib.IndexedDb,
-  Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Controls, DB;
+  Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Controls;
 
 type
   TForm1 = class(TWebForm)

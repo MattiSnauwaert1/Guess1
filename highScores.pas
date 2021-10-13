@@ -64,4 +64,4 @@ var
     Form1.IndexedDBClientDataSet.Refresh;
 end;
 end.
-    
+     
