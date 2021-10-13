@@ -73,17 +73,22 @@ var
   score : Integer;
   firstName : String;
   lastName : String;
-  
+  FDict: TDictionary<Integer,string, string>;
 begin
 
     
     begin
    
-
+        repeat 
          score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
          firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
          lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
       
+         FDict.Add(score, firstName, lastName);
+
+         Form1.IndexedDBClientDataSet.Next();
+
+      until Form1.IndexedDBClientDataSet.EOF
 
 
     end;
