@@ -65,29 +65,39 @@ var
 end;
 
 procedure TForm3.WebButton2Click(Sender: TObject);
-type
-    TPlayers = record
-      score : Integer;
-      firstName : String;
-      lastName : String;
-end;
+//type
+    //TPlayers = record
+      //score : Integer;
+      //firstName : String;
+      //lastName : String;
+//end;
   
 var
-  allPlayers : TPlayers;
+  //allPlayers : TPlayers;
+  playersList : TStringList;
+  scoreList : array of Integer;
+  score : Integer;
+  firstName: String;
+  lastName : String;
+  i : Integer;
     
 
 begin    
     begin
         //with allPlayers do
+        i := 0;
+        playersList := TStringList.Create;
         repeat 
-            allPlayers.score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
-            allPlayers.firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
-            allPlayers.lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
+            score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
+            firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
+            lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
 
             // only saves the last player object in the record
             // TPlayers.Add(allPlayers);
             // TPlayers.Insert(allPlayers);
-
+            playersList.Add(firstName);
+            scoreList[i] := score;
+            Inc(i);
             
               Form1.IndexedDBClientDataSet.Next();
 
@@ -99,10 +109,10 @@ begin
         var massPopChart = new Chart(myChart, {
             type : 'bar', //type chart
             data : {
-              labels: allPlayers.firstName,
+              labels: playersList ,
               datasets:[{
                 label : 'Number of Guesses',
-                data : allPlayers.score 
+                data : scoreList 
         
               }]
             },
