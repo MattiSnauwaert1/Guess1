@@ -65,50 +65,44 @@ var
 end;
 
 procedure TForm3.WebButton2Click(Sender: TObject);
-var 
-  score : Integer;
-  firstName : String;
-  lastName : String;
-  allScores : array of Integer;
-  allPlayers : array of String;
-  i : integer;
-begin
-
+type
+    TPlayers = record
+      score : Integer;
+      firstName : String;
+      lastName : String;
+end;
+  
+var
+  allPlayers : TPlayers;
     
+
+begin    
     begin
-       // i := 0;
-   
+        //with allPlayers do
         repeat 
-            score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
-            firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
-            lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
-          
-              allScores[i] := score;
-              SetLength (allScores, 20);
+            allPlayers.score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
+            allPlayers.firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
+            allPlayers.lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
 
-              allPlayers[i] := firstName;
-              SetLength (allPlayers, 20);
+            // only saves the last player object in the record
+            // TPlayers.Add(allPlayers);
+            // TPlayers.Insert(allPlayers);
 
-              Inc(i);
-
+            
               Form1.IndexedDBClientDataSet.Next();
 
         until Form1.IndexedDBClientDataSet.EOF
-
-
     end;
 
     asm
-      
       var myChart = document.getElementById('myChart').getContext('2d');
-    
         var massPopChart = new Chart(myChart, {
             type : 'bar', //type chart
             data : {
-              labels: allPlayers,
+              labels: allPlayers.firstName,
               datasets:[{
                 label : 'Number of Guesses',
-                data : allScores 
+                data : allPlayers.score 
         
               }]
             },

@@ -79449,39 +79449,41 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
        else this.WebDBGrid1.FColumns.GetItem$1(ACol).SetSortIndicator(pas["WEBLib.DBCtrls"].TGridSortIndicator.siAscending);
       pas.Unit1.Form1.IndexedDBClientDataSet.Refresh$2();
     };
+    var TPlayers = rtl.recNewT(null,"",function () {
+      this.score = 0;
+      this.firstName = "";
+      this.lastName = "";
+      this.$eq = function (b) {
+        return (this.score === b.score) && (this.firstName === b.firstName) && (this.lastName === b.lastName);
+      };
+      this.$assign = function (s) {
+        this.score = s.score;
+        this.firstName = s.firstName;
+        this.lastName = s.lastName;
+        return this;
+      };
+    });
     this.WebButton2Click = function (Sender) {
-      var score = 0;
-      var firstName = "";
-      var lastName = "";
-      var allScores = [];
-      var allPlayers = [];
-      var i = 0;
-      i = 0;
+      var allPlayers = TPlayers.$new();
       do {
-        score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
-        firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
-        lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
-        allScores[i] = score;
-        allScores = rtl.arraySetLength(allScores,0,20);
-        allPlayers[i] = firstName;
-        allPlayers = rtl.arraySetLength(allPlayers,"",20);
-        i += 1;
+        allPlayers.score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
+        allPlayers.firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
+        allPlayers.lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
         pas.Unit1.Form1.IndexedDBClientDataSet.Next();
       } while (!pas.Unit1.Form1.IndexedDBClientDataSet.FEOF);
       var myChart = document.getElementById('myChart').getContext('2d');
+      var massPopChart = new Chart(myChart, {
+          type : 'bar', //type chart
+          data : {
+            labels: allPlayers.firstName,
+            datasets:[{
+              label : 'Number of Guesses',
+              data : allPlayers.score 
       
-          var massPopChart = new Chart(myChart, {
-              type : 'bar', //type chart
-              data : {
-                labels: allPlayers,
-                datasets:[{
-                  label : 'Number of Guesses',
-                  data : allScores 
-          
-                }]
-              },
-              options : {}
-          });
+            }]
+          },
+          options : {}
+      });
     };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
