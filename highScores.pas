@@ -15,12 +15,8 @@ type
     WebButton2: TWebButton;
     procedure WebButton1Click(Sender: TObject);
     procedure WebDBGrid1FixedCellClick(Sender: TObject; ACol, ARow: Integer);
-
-    
-
-
-
     procedure WebButton2Click(Sender: TObject);
+
   private
     { Public declarations }
   public
@@ -83,21 +79,21 @@ begin
         i := 0;
    
         repeat 
-         score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
-         firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
-         lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
-      
-        allScores[i] := score;
-        SetLength (allScores, 20);
+            score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
+            firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
+            lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
+          
+              allScores[i] := score;
+              SetLength (allScores, 20);
 
-        allPlayers[i] := firstName;
-        SetLength (allPlayers, 20);
+              allPlayers[i] := firstName;
+              SetLength (allPlayers, 20);
 
-        Inc(i);
+              Inc(i);
 
-         Form1.IndexedDBClientDataSet.Next();
+              Form1.IndexedDBClientDataSet.Next();
 
-      until Form1.IndexedDBClientDataSet.EOF
+        until Form1.IndexedDBClientDataSet.EOF
 
 
     end;
@@ -113,9 +109,7 @@ begin
               datasets:[{
                 label : 'Number of Guesses',
                 data : allScores 
-                  
-                  
-                
+        
               }]
             },
             options : {}

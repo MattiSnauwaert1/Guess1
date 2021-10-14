@@ -79477,9 +79477,7 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
                 datasets:[{
                   label : 'Number of Guesses',
                   data : allScores 
-                    
-                    
-                  
+          
                 }]
               },
               options : {}
