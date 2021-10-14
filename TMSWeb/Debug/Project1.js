@@ -2158,6 +2158,8 @@ rtl.module("System",[],function () {
     return A !== B;
   };
   this.$rtti.$DynArray("TArray<Classes.TPersistentClass>",{});
+  this.$rtti.$DynArray("TArray<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>",{});
+  this.$rtti.$DynArray("TArray<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>",{});
   $mod.$implcode = function () {
     $mod.$rtti.$ExtClass("TJSObj",{jsclass: "Object"});
     $mod.$rtti.$ExtClass("TJSArray",{jsclass: "Array"});
@@ -79309,7 +79311,107 @@ rtl.module("WEBLib.DBCtrls",["System","Classes","DB","SysUtils","WEBLib.Controls
     };
   };
 },["WEBLib.WebTools"]);
-rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphics","WEBLib.Controls","WEBLib.Forms","WEBLib.Dialogs","DB","WEBLib.DB","WEBLib.IndexedDb","WEBLib.DBCtrls","WEBLib.StdCtrls","WEBLib.Grids","WEBLib.Menus"],function () {
+rtl.module("Generics.Strings",["System"],function () {
+  "use strict";
+  var $mod = this;
+  $mod.$resourcestrings = {SArgumentOutOfRange: {org: "Argument out of range"}};
+});
+rtl.module("Generics.Defaults",["System"],function () {
+  "use strict";
+  var $mod = this;
+});
+rtl.module("Generics.Collections",["System","Classes","SysUtils","RTLConsts","Types","JS","Generics.Strings","Generics.Defaults"],function () {
+  "use strict";
+  var $mod = this;
+  var $impl = $mod.$impl;
+  $mod.$rtti.$Class("TEnumerator<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>");
+  $mod.$rtti.$Class("TEnumerable<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>");
+  $mod.$rtti.$Class("TEnumerator<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  $mod.$rtti.$Class("TEnumerable<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  this.TCollectionNotification = {"0": "cnAdded", cnAdded: 0, "1": "cnRemoved", cnRemoved: 1, "2": "cnExtracted", cnExtracted: 2};
+  this.$rtti.$Enum("TCollectionNotification",{minvalue: 0, maxvalue: 2, ordtype: 1, enumtype: this.TCollectionNotification});
+  rtl.recNewT(this,"TBinarySearchResult",function () {
+    this.FoundIndex = 0;
+    this.CandidateIndex = 0;
+    this.CompareResult = 0;
+    this.$eq = function (b) {
+      return (this.FoundIndex === b.FoundIndex) && (this.CandidateIndex === b.CandidateIndex) && (this.CompareResult === b.CompareResult);
+    };
+    this.$assign = function (s) {
+      this.FoundIndex = s.FoundIndex;
+      this.CandidateIndex = s.CandidateIndex;
+      this.CompareResult = s.CompareResult;
+      return this;
+    };
+    var $r = $mod.$rtti.$Record("TBinarySearchResult",{});
+    $r.addField("FoundIndex",rtl.nativeint);
+    $r.addField("CandidateIndex",rtl.nativeint);
+    $r.addField("CompareResult",rtl.nativeint);
+  });
+  this.TDirection = {"0": "FromBeginning", FromBeginning: 0, "1": "fromEnd", fromEnd: 1};
+  this.$rtti.$Enum("TDirection",{minvalue: 0, maxvalue: 1, ordtype: 1, enumtype: this.TDirection});
+  rtl.createClass(this,"EDictionary",pas.SysUtils.Exception,function () {
+  });
+  rtl.createClass(this,"TEnumerator$G12",pas.System.TObject,function () {
+    this.MoveNext = function () {
+      var Result = false;
+      Result = this.DoMoveNext();
+      return Result;
+    };
+  },"TEnumerator<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>");
+  rtl.createClass(this,"TEnumerable$G11",pas.System.TObject,function () {
+    this.GetEnumerator = function () {
+      var Result = null;
+      Result = this.DoGetEnumerator();
+      return Result;
+    };
+    this.ToArray = function () {
+      var Result = [];
+      var LEnumerator = null;
+      Result = [];
+      LEnumerator = this.GetEnumerator();
+      try {
+        while (LEnumerator.MoveNext()) Result.push($mod.TPair$G1.$clone(LEnumerator.DoGetCurrent()));
+      } finally {
+        LEnumerator = rtl.freeLoc(LEnumerator);
+      };
+      return Result;
+    };
+  },"TEnumerable<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>");
+  this.TDictionaryOwnership = {"0": "doOwnsKeys", doOwnsKeys: 0, "1": "doOwnsValues", doOwnsValues: 1};
+  this.$rtti.$Enum("TDictionaryOwnership",{minvalue: 0, maxvalue: 1, ordtype: 1, enumtype: this.TDictionaryOwnership});
+  this.$rtti.$Set("TDictionaryOwnerships",{comptype: this.$rtti["TDictionaryOwnership"]});
+  rtl.createClass(this,"TEnumerator$G15",pas.System.TObject,function () {
+    this.MoveNext = function () {
+      var Result = false;
+      Result = this.DoMoveNext();
+      return Result;
+    };
+  },"TEnumerator<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  rtl.createClass(this,"TEnumerable$G14",pas.System.TObject,function () {
+    this.GetEnumerator = function () {
+      var Result = null;
+      Result = this.DoGetEnumerator();
+      return Result;
+    };
+    this.ToArray = function () {
+      var Result = [];
+      var LEnumerator = null;
+      Result = [];
+      LEnumerator = this.GetEnumerator();
+      try {
+        while (LEnumerator.MoveNext()) Result.push($mod.TPair$G2.$clone(LEnumerator.DoGetCurrent()));
+      } finally {
+        LEnumerator = rtl.freeLoc(LEnumerator);
+      };
+      return Result;
+    };
+  },"TEnumerable<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  $mod.$implcode = function () {
+    $mod.$resourcestrings = {SErrDictKeyNotFound: {org: "Key value not found"}, SErrDictDuplicateKey: {org: "Duplicate key value"}};
+  };
+},[]);
+rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphics","WEBLib.Controls","WEBLib.Forms","WEBLib.Dialogs","DB","WEBLib.DB","WEBLib.IndexedDb","WEBLib.DBCtrls","WEBLib.StdCtrls","WEBLib.Grids","WEBLib.Menus","Generics.Collections"],function () {
   "use strict";
   var $mod = this;
   rtl.createClass(this,"TForm3",pas["WEBLib.Forms"].TForm,function () {
@@ -79351,20 +79453,33 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
       var score = 0;
       var firstName = "";
       var lastName = "";
-      score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
-      firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
-      lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
+      var allScores = [];
+      var allPlayers = [];
+      var i = 0;
+      i = 0;
+      do {
+        score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
+        firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
+        lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
+        allScores[i] = score;
+        allScores = rtl.arraySetLength(allScores,0,20);
+        allPlayers[i] = firstName;
+        allPlayers = rtl.arraySetLength(allPlayers,"",20);
+        i += 1;
+        pas.Unit1.Form1.IndexedDBClientDataSet.Next();
+      } while (!pas.Unit1.Form1.IndexedDBClientDataSet.FEOF);
       var myChart = document.getElementById('myChart').getContext('2d');
       
           var massPopChart = new Chart(myChart, {
               type : 'bar', //type chart
               data : {
-                labels:[firstName],
+                labels: allPlayers,
                 datasets:[{
-                  label : 'Guesses',
-                  data : [
-                    score,
-                  ]
+                  label : 'Number of Guesses',
+                  data : allScores 
+                    
+                    
+                  
                 }]
               },
               options : {}
@@ -80227,6 +80342,8 @@ rtl.module("program",["System","WEBLib.Forms","Unit1","guessform","highScores"],
   var $mod = this;
   $mod.$implcode = function () {
     pas.System.$rtti["TArray<Classes.TPersistentClass>"].eltype = pas.Classes.$rtti["TPersistentClass"];
+    pas.System.$rtti["TArray<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>"].eltype = pas["Generics.Collections"].$rtti["TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>"];
+    pas.System.$rtti["TArray<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>"].eltype = pas["Generics.Collections"].$rtti["TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>"];
   };
   $mod.$main = function () {
     pas["WEBLib.Forms"].Application.Initialize();

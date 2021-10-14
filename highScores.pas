@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, WEBLib.DB, WEBLib.IndexedDb,
-  WEBLib.Controls, WEBLib.DBCtrls, Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Grids, WEBLib.Menus, WEBLib.Grids;
+  WEBLib.Controls, WEBLib.DBCtrls, Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Grids, WEBLib.Menus, WEBLib.Grids, generics.collections;
 
 type
   TForm3 = class(TForm)
@@ -73,18 +73,27 @@ var
   score : Integer;
   firstName : String;
   lastName : String;
-  FDict: TDictionary<Integer,string, string>;
+  allScores : array of Integer;
+  allPlayers : array of String;
+  i : integer;
 begin
 
     
     begin
+        i := 0;
    
         repeat 
          score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
          firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
          lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
       
-         FDict.Add(score, firstName, lastName);
+        allScores[i] := score;
+        SetLength (allScores, 20);
+
+        allPlayers[i] := firstName;
+        SetLength (allPlayers, 20);
+
+        Inc(i);
 
          Form1.IndexedDBClientDataSet.Next();
 
@@ -100,12 +109,13 @@ begin
         var massPopChart = new Chart(myChart, {
             type : 'bar', //type chart
             data : {
-              labels:[firstName],
+              labels: allPlayers,
               datasets:[{
-                label : 'Guesses',
-                data : [
-                  score,
-                ]
+                label : 'Number of Guesses',
+                data : allScores 
+                  
+                  
+                
               }]
             },
             options : {}
