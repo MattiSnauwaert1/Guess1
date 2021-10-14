@@ -76,7 +76,7 @@ begin
 
     
     begin
-        i := 0;
+       // i := 0;
    
         repeat 
             score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
