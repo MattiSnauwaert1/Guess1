@@ -45,8 +45,6 @@ begin
   Close;
 end;
 
-
-
 procedure TForm3.WebDBGrid1FixedCellClick(Sender: TObject; ACol, ARow: Integer);
 var
   LIndex: string;
@@ -71,20 +69,17 @@ var
     Form1.IndexedDBClientDataSet.Refresh;
 end;
 
-procedure TForm3.WebButton2Click(Sender: TObject);
-  
-var
-  
+procedure TForm3.WebButton2Click(Sender: TObject); 
+var 
   score : Integer;
   firstName: String;
   i : Integer;
-    
 
 begin  
      i := 0;  
     begin
         ListPlayers := TList<Players>.Create;
-        //with allPlayers do
+        
      asm
         var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -93,45 +88,55 @@ begin
         labels: [],
         datasets: [{
         data: [],
+         backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
         borderWidth: 1,
-        borderColor:'#00c0ef',
-        label: 'liveCount',
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        label: 'High Scores',
       }]
-    },
-  options: {
-    responsive: true,
-    title: {
-      display: true,
-      text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
-    },
-    legend: {
-      display: false
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-        }
-      }]
+        },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: "Chart.js - The HighScores of the players",
+        },
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+            }
+          }]
+      }
     }
-  }
 });
-
-     end;  
-        
-
-        
+     end;      
         repeat 
             MyPlayer.Score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
             MyPlayer.Name := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
-           // lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
-
-            // only saves the last player object in the record
-            // TPlayers.Add(allPlayers);
-            // TPlayers.Insert(allPlayers);
             
             ListPlayers.Add(MyPlayer);
 
+            //Save the score and name in local declared variables
+            // These variabeles with their values are pushed to the myChart
             score := MyPlayer.Score;
             firstName := MyPlayer.Name;
             
@@ -141,11 +146,9 @@ begin
             myChart.data.labels.push(firstName);
             
           end;
-
-            
             Inc(i);
             
-              Form1.IndexedDBClientDataSet.Next();
+            Form1.IndexedDBClientDataSet.Next();
 
         until Form1.IndexedDBClientDataSet.EOF;
 
