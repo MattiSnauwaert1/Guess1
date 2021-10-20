@@ -2160,6 +2160,7 @@ rtl.module("System",[],function () {
   this.$rtti.$DynArray("TArray<Classes.TPersistentClass>",{});
   this.$rtti.$DynArray("TArray<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>",{});
   this.$rtti.$DynArray("TArray<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>",{});
+  this.$rtti.$DynArray("TArray<highScores.Players>",{});
   $mod.$implcode = function () {
     $mod.$rtti.$ExtClass("TJSObj",{jsclass: "Object"});
     $mod.$rtti.$ExtClass("TJSArray",{jsclass: "Array"});
@@ -79319,6 +79320,104 @@ rtl.module("Generics.Strings",["System"],function () {
 rtl.module("Generics.Defaults",["System"],function () {
   "use strict";
   var $mod = this;
+  $mod.$rtti.$Interface("IComparer<highScores.Players>");
+  $mod.$rtti.$Interface("IEnumerator<highScores.Players>");
+  $mod.$rtti.$Interface("IEnumerable<highScores.Players>");
+  $mod.$rtti.$Class("TComparer<highScores.Players>");
+  $mod.$rtti.$Class("TDefaultComparer<highScores.Players>");
+  $mod.$rtti.$Class("TDelegatedComparerEvents<highScores.Players>");
+  rtl.createInterface(this,"IComparer$G16","{505778ED-F783-4456-9691-32F419CC5E18}",["Compare"],pas.System.IUnknown,function () {
+    this.$initSpec = function () {
+      var $r = this.$rtti;
+      $r.addMethod("Compare",1,[["Left",pas.highScores.$rtti["Players"],2],["Right",pas.highScores.$rtti["Players"],2]],rtl.longint);
+    };
+  },"IComparer<highScores.Players>");
+  rtl.createInterface(this,"IEnumerator$G5","{0DB0CF71-0B0D-3C08-B26C-017A18571D74}",["GetCurrent","MoveNext","Reset"],pas.System.IUnknown,function () {
+    this.$initSpec = function () {
+      var $r = this.$rtti;
+      $r.addMethod("GetCurrent",1,null,pas.highScores.$rtti["Players"]);
+      $r.addMethod("MoveNext",1,null,rtl.boolean);
+      $r.addMethod("Reset",0,null);
+      $r.addProperty("Current",1,pas.highScores.$rtti["Players"],"GetCurrent","");
+    };
+  },"IEnumerator<highScores.Players>");
+  rtl.createInterface(this,"IEnumerable$G4","{1F6AE488-6948-3C07-A1AE-8CDA342A3F10}",["GetEnumerator"],pas.System.IUnknown,function () {
+    this.$initSpec = function () {
+      var $r = this.$rtti;
+      $r.addMethod("GetEnumerator",1,null,$mod.$rtti["IEnumerator<highScores.Players>"]);
+    };
+  },"IEnumerable<highScores.Players>");
+  this.$rtti.$RefToProcVar("TOnComparison<highScores.Players>",{init: function () {
+      this.procsig = rtl.newTIProcSig([["Left",pas.highScores.$rtti["Players"],2],["Right",pas.highScores.$rtti["Players"],2]],rtl.longint);
+    }});
+  rtl.createClass(this,"TComparer$G6",pas.System.TInterfacedObject,function () {
+    this.$initSpec = function () {
+      this.DefaultComparer = null;
+    };
+    this.Default = function () {
+      var Result = null;
+      var $ok = false;
+      try {
+        if ($mod.TComparer$G6.DefaultComparer === null) $mod.TComparer$G6.DefaultComparer = $mod.TDefaultComparer$G6.$create("Create");
+        Result = rtl.setIntfL(Result,rtl.queryIntfT($mod.TComparer$G6.DefaultComparer,$mod.IComparer$G16),true);
+        $ok = true;
+      } finally {
+        if (!$ok) rtl._Release(Result);
+      };
+      return Result;
+    };
+    this.Construct = function (AComparison) {
+      var Result = null;
+      var $ok = false;
+      try {
+        Result = rtl.setIntfL(Result,rtl.queryIntfT($mod.TDelegatedComparerEvents$G6.$create("Create$1",[AComparison]),$mod.IComparer$G16),true);
+        $ok = true;
+      } finally {
+        if (!$ok) rtl._Release(Result);
+      };
+      return Result;
+    };
+    rtl.addIntf(this,$mod.IComparer$G16);
+    rtl.addIntf(this,pas.System.IUnknown);
+  },"TComparer<highScores.Players>");
+  rtl.createClass(this,"TDefaultComparer$G6",this.TComparer$G6,function () {
+    this.$initSpec = function () {
+    };
+    this.Compare = function (ALeft, ARight) {
+      var Result = 0;
+      if (ALeft < ARight) return -1;
+      if (ALeft > ARight) return 1;
+      Result = 0;
+      if (ALeft.$eq(ARight)) return Result;
+      return Result;
+    };
+    rtl.addIntf(this,$mod.IComparer$G16);
+    rtl.addIntf(this,pas.System.IUnknown);
+  },"TDefaultComparer<highScores.Players>");
+  rtl.createClass(this,"TDelegatedComparerEvents$G6",this.TComparer$G6,function () {
+    this.$initSpec = function () {
+    };
+    this.$init = function () {
+      $mod.TComparer$G6.$init.call(this);
+      this.FComparison = null;
+    };
+    this.$final = function () {
+      this.FComparison = undefined;
+      $mod.TComparer$G6.$final.call(this);
+    };
+    this.Compare = function (ALeft, ARight) {
+      var Result = 0;
+      Result = this.FComparison(ALeft,ARight);
+      return Result;
+    };
+    this.Create$1 = function (AComparison) {
+      pas.System.TObject.Create.call(this);
+      this.FComparison = AComparison;
+      return this;
+    };
+    rtl.addIntf(this,$mod.IComparer$G16);
+    rtl.addIntf(this,pas.System.IUnknown);
+  },"TDelegatedComparerEvents<highScores.Players>");
 });
 rtl.module("Generics.Collections",["System","Classes","SysUtils","RTLConsts","Types","JS","Generics.Strings","Generics.Defaults"],function () {
   "use strict";
@@ -79328,6 +79427,13 @@ rtl.module("Generics.Collections",["System","Classes","SysUtils","RTLConsts","Ty
   $mod.$rtti.$Class("TEnumerable<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>");
   $mod.$rtti.$Class("TEnumerator<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
   $mod.$rtti.$Class("TEnumerable<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  $mod.$rtti.$Class("TEnumerator<highScores.Players>");
+  $mod.$rtti.$Class("TEnumerable<highScores.Players>");
+  $mod.$rtti.$Class("TCustomArrayHelper<highScores.Players>");
+  $mod.$rtti.$Class("TArrayHelper<highScores.Players>");
+  $mod.$rtti.$Class("TCustomList<highScores.Players>");
+  $mod.$rtti.$Class("TCustomListEnumerator<highScores.Players>");
+  $mod.$rtti.$Class("TList<highScores.Players>");
   this.TCollectionNotification = {"0": "cnAdded", cnAdded: 0, "1": "cnRemoved", cnRemoved: 1, "2": "cnExtracted", cnExtracted: 2};
   this.$rtti.$Enum("TCollectionNotification",{minvalue: 0, maxvalue: 2, ordtype: 1, enumtype: this.TCollectionNotification});
   rtl.recNewT(this,"TBinarySearchResult",function () {
@@ -79407,6 +79513,583 @@ rtl.module("Generics.Collections",["System","Classes","SysUtils","RTLConsts","Ty
       return Result;
     };
   },"TEnumerable<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>");
+  rtl.createClass(this,"TEnumerator$G18",pas.System.TObject,function () {
+    this.$initSpec = function () {
+    };
+    this.MoveNext = function () {
+      var Result = false;
+      Result = this.DoMoveNext();
+      return Result;
+    };
+  },"TEnumerator<highScores.Players>");
+  rtl.createClass(this,"TEnumerable$G17",pas.System.TObject,function () {
+    this.$initSpec = function () {
+    };
+    this.GetEnumerator = function () {
+      var Result = null;
+      Result = this.DoGetEnumerator();
+      return Result;
+    };
+    this.ToArray = function () {
+      var Result = [];
+      var LEnumerator = null;
+      Result = [];
+      LEnumerator = this.GetEnumerator();
+      try {
+        while (LEnumerator.MoveNext()) Result.push(pas.highScores.Players.$clone(LEnumerator.DoGetCurrent()));
+      } finally {
+        LEnumerator = rtl.freeLoc(LEnumerator);
+      };
+      return Result;
+    };
+  },"TEnumerable<highScores.Players>");
+  this.$rtti.$MethodVar("TCollectionNotifyEvent<highScores.Players>",{init: function () {
+      this.procsig = rtl.newTIProcSig([["ASender",pas.System.$rtti["TObject"]],["AItem",pas.highScores.$rtti["Players"],2],["AAction",$mod.$rtti["TCollectionNotification"]]]);
+    }, methodkind: 0});
+  rtl.createClass(this,"TCustomArrayHelper$G12",pas.System.TObject,function () {
+    this.$initSpec = function () {
+    };
+    this.Sort = function (AValues, AComparer) {
+      this.QuickSort(AValues,0,rtl.length(AValues.get()),AComparer);
+    };
+    this.Sort$1 = function (AValues, AComparer, AIndex, ACount) {
+      if (ACount <= 1) return;
+      this.QuickSort(AValues,AIndex,(AIndex + ACount) - 1,AComparer);
+    };
+    this.BinarySearch$2 = function (AValues, AItem, AFoundIndex, AComparer) {
+      var Result = false;
+      Result = this.BinarySearch$1(AValues,AItem,AFoundIndex,AComparer,0,rtl.length(AValues));
+      return Result;
+    };
+    this.BinarySearch$3 = function (AValues, AItem, ASearchResult, AComparer) {
+      var Result = false;
+      Result = this.BinarySearch(AValues,AItem,ASearchResult,AComparer,0,rtl.length(AValues));
+      return Result;
+    };
+  },"TCustomArrayHelper<highScores.Players>");
+  rtl.createClass(this,"TArrayHelper$G11",this.TCustomArrayHelper$G12,function () {
+    this.$initSpec = function () {
+    };
+    this.QuickSort = function (AValues, ALeft, ARight, AComparer) {
+      var I = 0;
+      var J = 0;
+      var P = pas.highScores.Players.$new();
+      var Q = pas.highScores.Players.$new();
+      if (((ARight - ALeft) <= 0) || (rtl.length(AValues.get()) === 0)) return;
+      do {
+        I = ALeft;
+        J = ARight;
+        P.$assign(AValues.get()[ALeft + Math.floor((ARight - ALeft) / 2)]);
+        do {
+          while (AComparer.Compare(AValues.get()[I],P) < 0) I += 1;
+          while (AComparer.Compare(AValues.get()[J],P) > 0) J -= 1;
+          if (I <= J) {
+            if (I !== J) {
+              Q.$assign(AValues.get()[I]);
+              AValues.get()[I].$assign(AValues.get()[J]);
+              AValues.get()[J].$assign(Q);
+            };
+            I += 1;
+            J -= 1;
+          };
+        } while (!(I > J));
+        if ((J - ALeft) < (ARight - I)) {
+          if (ALeft < J) this.QuickSort(AValues,ALeft,J,AComparer);
+          ALeft = I;
+        } else {
+          if (I < ARight) this.QuickSort(AValues,I,ARight,AComparer);
+          ARight = J;
+        };
+      } while (!(ALeft >= ARight));
+    };
+    this.BinarySearch = function (AValues, AItem, ASearchResult, AComparer, AIndex, ACount) {
+      var Result = false;
+      var imin = 0;
+      var imax = 0;
+      var imid = 0;
+      var ilo = 0;
+      imin = AIndex;
+      imax = (AIndex + ACount) - 1;
+      ilo = imid * imid;
+      imid = ilo * imid;
+      while (imin < imax) {
+        imid = rtl.trunc((imax + imin) / 2);
+        ASearchResult.CompareResult = AComparer.Compare(AValues[imid],AItem);
+        if (ASearchResult.CompareResult < 0) {
+          imin = imid + 1}
+         else {
+          if (ASearchResult.CompareResult === 0) {
+            ASearchResult.FoundIndex = imid;
+            ASearchResult.CandidateIndex = imid;
+            return true;
+          };
+          imax = imid;
+        };
+      };
+      Result = imax === imin;
+      if (Result) {
+        ASearchResult.CompareResult = AComparer.Compare(AValues[imin],AItem);
+        ASearchResult.CandidateIndex = imin;
+        Result = ASearchResult.CompareResult === 0;
+        if (Result) {
+          ASearchResult.FoundIndex = imin}
+         else ASearchResult.FoundIndex = -1;
+      } else {
+        ASearchResult.CompareResult = 0;
+        ASearchResult.FoundIndex = -1;
+        ASearchResult.CandidateIndex = -1;
+      };
+      return Result;
+    };
+    this.BinarySearch$1 = function (AValues, AItem, AFoundIndex, AComparer, AIndex, ACount) {
+      var Result = false;
+      var imin = 0;
+      var imax = 0;
+      var imid = 0;
+      var LCompare = 0;
+      imin = AIndex;
+      imax = (AIndex + ACount) - 1;
+      while (imin < imax) {
+        imid = rtl.trunc((imin + imax) / 2);
+        LCompare = AComparer.Compare(AValues[imid],AItem);
+        if (LCompare < 0) {
+          imin = imid + 1}
+         else {
+          if (LCompare === 0) {
+            AFoundIndex.set(imid);
+            return true;
+          };
+          imax = imid;
+        };
+      };
+      LCompare = AComparer.Compare(AValues[imin],AItem);
+      Result = (imax === imin) && (LCompare === 0);
+      if (Result) {
+        AFoundIndex.set(imin)}
+       else AFoundIndex.set(-1);
+      return Result;
+    };
+  },"TArrayHelper<highScores.Players>");
+  rtl.createClass(this,"TCustomList$G10",this.TEnumerable$G17,function () {
+    this.$initSpec = function () {
+      var $r = this.$rtti;
+      $mod.$rtti.$DynArray("TCustomList<highScores.Players>.FItems$a",{eltype: pas.highScores.$rtti["Players"]});
+    };
+    this.$init = function () {
+      $mod.TEnumerable$G17.$init.call(this);
+      this.FOnNotify = null;
+      this.FLength = 0;
+      this.FItems = [];
+    };
+    this.$final = function () {
+      this.FOnNotify = undefined;
+      this.FItems = undefined;
+      $mod.TEnumerable$G17.$final.call(this);
+    };
+    this.GetCapacity = function () {
+      var Result = 0;
+      Result = rtl.length(this.FItems);
+      return Result;
+    };
+    this.PrepareAddingItem = function () {
+      var Result = 0;
+      if (this.FLength === rtl.length(this.FItems)) this.FItems.push(pas.highScores.Players.$new());
+      Result = this.FLength;
+      this.FLength += 1;
+      return Result;
+    };
+    this.PrepareAddingRange = function (ACount) {
+      var Result = 0;
+      var l = 0;
+      if (ACount < 0) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      if (ACount === 0) return this.FLength - 1;
+      for (var $l = rtl.length(this.FItems) + 1, $end = this.FLength + ACount; $l <= $end; $l++) {
+        l = $l;
+        this.FItems.push(pas.highScores.Players.$new());
+      };
+      Result = this.FLength;
+      this.FLength += ACount;
+      return Result;
+    };
+    this.Notify = function (AValue, ACollectionNotification) {
+      if (this.FOnNotify != null) this.FOnNotify(this,AValue,ACollectionNotification);
+    };
+    this.DoRemove = function (AIndex, ACollectionNotification) {
+      var Result = pas.highScores.Players.$new();
+      if ((AIndex < 0) || (AIndex >= this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      Result.$assign(this.FItems[AIndex]);
+      this.FLength -= 1;
+      this.FItems[AIndex].$assign(pas.highScores.Players.$new());
+      this.FItems.splice(AIndex,1);
+      this.Notify(Result,ACollectionNotification);
+      return Result;
+    };
+    this.GetCount = function () {
+      var Result = 0;
+      Result = this.FLength;
+      return Result;
+    };
+  },"TCustomList<highScores.Players>");
+  rtl.createClass(this,"TCustomListEnumerator$G8",this.TEnumerator$G18,function () {
+    this.$initSpec = function () {
+    };
+    this.$init = function () {
+      $mod.TEnumerator$G18.$init.call(this);
+      this.FList = null;
+      this.FIndex = 0;
+    };
+    this.$final = function () {
+      this.FList = undefined;
+      $mod.TEnumerator$G18.$final.call(this);
+    };
+    this.DoMoveNext = function () {
+      var Result = false;
+      this.FIndex += 1;
+      Result = (this.FList.FLength > 0) && (this.FIndex < this.FList.FLength);
+      return Result;
+    };
+    this.DoGetCurrent = function () {
+      var Result = pas.highScores.Players.$new();
+      Result.$assign(this.GetCurrent());
+      return Result;
+    };
+    this.GetCurrent = function () {
+      var Result = pas.highScores.Players.$new();
+      Result.$assign(this.FList.FItems[this.FIndex]);
+      return Result;
+    };
+    this.Create$1 = function (AList) {
+      pas.System.TObject.Create.call(this);
+      this.FIndex = -1;
+      this.FList = AList;
+      return this;
+    };
+  },"TCustomListEnumerator<highScores.Players>");
+  rtl.createClass(this,"TList$G3",this.TCustomList$G10,function () {
+    this.$initSpec = function () {
+      rtl.createClass(this,"TEnumerator",$mod.TCustomListEnumerator$G8,function () {
+      },"TList<highScores.Players>.TEnumerator");
+    };
+    this.$init = function () {
+      $mod.TCustomList$G10.$init.call(this);
+      this.FComparer = null;
+    };
+    this.$final = function () {
+      this.FComparer = undefined;
+      $mod.TCustomList$G10.$final.call(this);
+    };
+    this.SetCapacity = function (AValue) {
+      if (AValue < this.FLength) this.SetCount(AValue);
+      this.FItems = rtl.arraySetLength(this.FItems,pas.highScores.Players,AValue);
+    };
+    this.SetCount = function (AValue) {
+      if (AValue < 0) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      if (AValue > this.GetCapacity()) {
+        this.SetCapacity(AValue)}
+       else if (AValue < this.FLength) this.DeleteRange(AValue,this.FLength - AValue);
+      this.FLength = AValue;
+    };
+    this.InitializeList = function () {
+    };
+    this.InternalInsert = function (AIndex, AValue) {
+      if ((AIndex < 0) || (AIndex > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      this.FItems.splice(AIndex,0,AValue);
+      this.FLength += 1;
+      this.FItems[AIndex].$assign(AValue);
+      this.Notify(AValue,$mod.TCollectionNotification.cnAdded);
+    };
+    this.DoGetEnumerator = function () {
+      var Result = null;
+      Result = this.GetEnumerator$1();
+      return Result;
+    };
+    this.GetItem = function (AIndex) {
+      var Result = pas.highScores.Players.$new();
+      if ((AIndex < 0) || (AIndex >= this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      Result.$assign(this.FItems[AIndex]);
+      return Result;
+    };
+    this.SetItem = function (AIndex, AValue) {
+      if ((AIndex < 0) || (AIndex >= this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      this.Notify(this.FItems[AIndex],$mod.TCollectionNotification.cnRemoved);
+      this.FItems[AIndex].$assign(AValue);
+      this.Notify(AValue,$mod.TCollectionNotification.cnAdded);
+    };
+    this.GetEnumerator$1 = function () {
+      var Result = null;
+      Result = this.TEnumerator.$create("Create$1",[this]);
+      return Result;
+    };
+    this.Create$1 = function () {
+      this.InitializeList();
+      rtl.setIntfP(this,"FComparer",pas["Generics.Defaults"].TComparer$G6.Default(),true);
+      return this;
+    };
+    this.Create$2 = function (AComparer) {
+      this.InitializeList();
+      rtl.setIntfP(this,"FComparer",AComparer);
+      return this;
+    };
+    this.Create$3 = function (ACollection) {
+      var LItem = pas.highScores.Players.$new();
+      this.Create$1();
+      var $in = ACollection.GetEnumerator();
+      try {
+        while ($in.MoveNext()) {
+          LItem = $in.DoGetCurrent();
+          this.Add(LItem);
+        }
+      } finally {
+        $in = rtl.freeLoc($in)
+      };
+      return this;
+    };
+    this.Destroy = function () {
+      this.SetCapacity(0);
+    };
+    this.Add = function (AValue) {
+      var Result = 0;
+      Result = this.PrepareAddingItem();
+      this.FItems[Result].$assign(AValue);
+      this.Notify(AValue,$mod.TCollectionNotification.cnAdded);
+      return Result;
+    };
+    this.AddRange = function (AValues) {
+      this.InsertRange(this.FLength,AValues);
+    };
+    this.AddRange$1 = function (AEnumerable) {
+      var LValue = pas.highScores.Players.$new();
+      var $in = AEnumerable.GetEnumerator();
+      try {
+        while ($in.MoveNext()) {
+          LValue = $in.GetCurrent();
+          this.Add(LValue);
+        }
+      } finally {
+        rtl._Release($in)
+      };
+    };
+    this.AddRange$2 = function (AEnumerable) {
+      var LValue = pas.highScores.Players.$new();
+      var $in = AEnumerable.GetEnumerator();
+      try {
+        while ($in.MoveNext()) {
+          LValue = $in.DoGetCurrent();
+          this.Add(LValue);
+        }
+      } finally {
+        $in = rtl.freeLoc($in)
+      };
+    };
+    this.Insert = function (AIndex, AValue) {
+      if ((AIndex < 0) || (AIndex > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      this.InternalInsert(AIndex,AValue);
+    };
+    this.InsertRange = function (AIndex, AValues) {
+      var LLength = 0;
+      var i = 0;
+      var LValue = pas.highScores.Players.$new();
+      if ((AIndex < 0) || (AIndex > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      LLength = rtl.length(AValues);
+      if (LLength === 0) return;
+      if (AIndex !== this.PrepareAddingRange(LLength)) {
+        for (var $l = AIndex, $end = this.FLength - LLength - 1; $l <= $end; $l++) {
+          i = $l;
+          this.FItems[i + LLength].$assign(this.FItems[i]);
+        };
+        for (var $l1 = 0, $end1 = LLength - 1; $l1 <= $end1; $l1++) {
+          i = $l1;
+          this.FItems[AIndex + i].$assign(pas.highScores.Players.$new());
+        };
+      };
+      for (var $l2 = 0, $end2 = LLength - 1; $l2 <= $end2; $l2++) {
+        i = $l2;
+        LValue.$assign(AValues[i]);
+        this.FItems[i + AIndex].$assign(LValue);
+        this.Notify(LValue,$mod.TCollectionNotification.cnAdded);
+      };
+    };
+    this.InsertRange$1 = function (AIndex, AEnumerable) {
+      var LValue = pas.highScores.Players.$new();
+      var i = 0;
+      if ((AIndex < 0) || (AIndex > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      i = 0;
+      var $in = AEnumerable.GetEnumerator();
+      try {
+        while ($in.MoveNext()) {
+          LValue = $in.GetCurrent();
+          this.InternalInsert(AIndex + i,LValue);
+          i += 1;
+        }
+      } finally {
+        rtl._Release($in)
+      };
+    };
+    this.InsertRange$2 = function (AIndex, AEnumerable) {
+      var LValue = pas.highScores.Players.$new();
+      var i = 0;
+      if ((AIndex < 0) || (AIndex > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      i = 0;
+      var $in = AEnumerable.GetEnumerator();
+      try {
+        while ($in.MoveNext()) {
+          LValue = $in.DoGetCurrent();
+          this.InternalInsert(AIndex + i,LValue);
+          i += 1;
+        }
+      } finally {
+        $in = rtl.freeLoc($in)
+      };
+    };
+    this.Remove = function (AValue) {
+      var Result = 0;
+      Result = this.IndexOf(AValue);
+      if (Result >= 0) this.DoRemove(Result,$mod.TCollectionNotification.cnRemoved);
+      return Result;
+    };
+    this.RemoveItem = function (AValue, Direction) {
+      var Result = 0;
+      if (Direction === $mod.TDirection.fromEnd) {
+        Result = this.LastIndexOf(AValue)}
+       else Result = this.IndexOf(AValue);
+      if (Result >= 0) this.DoRemove(Result,$mod.TCollectionNotification.cnRemoved);
+      return Result;
+    };
+    this.Delete = function (AIndex) {
+      this.DoRemove(AIndex,$mod.TCollectionNotification.cnRemoved);
+    };
+    this.DeleteRange = function (AIndex, ACount) {
+      var LDeleted = [];
+      var i = 0;
+      if (ACount === 0) return;
+      if ((ACount < 0) || (AIndex < 0) || ((AIndex + ACount) > this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      LDeleted = this.FItems.splice(AIndex,this.FLength);
+      this.FLength -= ACount;
+      for (var $l = 0, $end = rtl.length(LDeleted) - 1; $l <= $end; $l++) {
+        i = $l;
+        this.Notify(LDeleted[i],$mod.TCollectionNotification.cnRemoved);
+      };
+    };
+    this.ExtractIndex = function (AIndex) {
+      var Result = pas.highScores.Players.$new();
+      Result.$assign(this.DoRemove(AIndex,$mod.TCollectionNotification.cnExtracted));
+      return Result;
+    };
+    this.Extract = function (AValue) {
+      var Result = pas.highScores.Players.$new();
+      var LIndex = 0;
+      LIndex = this.IndexOf(AValue);
+      if (LIndex < 0) {
+        Result.$assign(pas.highScores.Players.$new())}
+       else Result.$assign(this.DoRemove(LIndex,$mod.TCollectionNotification.cnExtracted));
+      return Result;
+    };
+    this.Exchange = function (AIndex1, AIndex2) {
+      var LTemp = pas.highScores.Players.$new();
+      LTemp.$assign(this.FItems[AIndex1]);
+      this.FItems[AIndex1].$assign(this.FItems[AIndex2]);
+      this.FItems[AIndex2].$assign(LTemp);
+    };
+    this.Move = function (AIndex, ANewIndex) {
+      var Arr = null;
+      var LTemp = undefined;
+      var i = 0;
+      if (ANewIndex === AIndex) return;
+      if ((ANewIndex < 0) || (ANewIndex >= this.FLength)) throw pas.SysUtils.EArgumentOutOfRangeException.$create("Create$1",[rtl.getResStr(pas["Generics.Strings"],"SArgumentOutOfRange")]);
+      Arr = this.FItems;
+      LTemp = Arr[AIndex];
+      if (AIndex < ANewIndex) {
+        for (var $l = AIndex, $end = ANewIndex - 1; $l <= $end; $l++) {
+          i = $l;
+          Arr[i] = Arr[i + 1];
+        }}
+       else for (var $l1 = ANewIndex, $end1 = AIndex + 1; $l1 >= $end1; $l1--) {
+        i = $l1;
+        Arr[i] = Arr[i - 1];
+      };
+      Arr[ANewIndex] = LTemp;
+    };
+    this.First = function () {
+      var Result = pas.highScores.Players.$new();
+      Result.$assign(this.GetItem(0));
+      return Result;
+    };
+    this.Last = function () {
+      var Result = pas.highScores.Players.$new();
+      Result.$assign(this.GetItem(this.FLength - 1));
+      return Result;
+    };
+    this.Clear = function () {
+      this.SetCount(0);
+      this.SetCapacity(0);
+    };
+    this.Contains = function (AValue) {
+      var Result = false;
+      Result = this.IndexOf(AValue) >= 0;
+      return Result;
+    };
+    this.IndexOf = function (AValue) {
+      var Result = 0;
+      var i = 0;
+      for (var $l = 0, $end = this.FLength - 1; $l <= $end; $l++) {
+        i = $l;
+        if (this.FComparer.Compare(AValue,this.FItems[i]) === 0) return i;
+      };
+      Result = -1;
+      return Result;
+    };
+    this.LastIndexOf = function (AValue) {
+      var Result = 0;
+      var i = 0;
+      for (var $l = this.FLength - 1; $l >= 0; $l--) {
+        i = $l;
+        if (this.FComparer.Compare(AValue,this.FItems[i]) === 0) return i;
+      };
+      Result = -1;
+      return Result;
+    };
+    this.Reverse = function () {
+      var a = 0;
+      var b = 0;
+      var LTemp = pas.highScores.Players.$new();
+      a = 0;
+      b = this.FLength - 1;
+      while (a < b) {
+        LTemp.$assign(this.FItems[a]);
+        this.FItems[a].$assign(this.FItems[b]);
+        this.FItems[b].$assign(LTemp);
+        a += 1;
+        b -= 1;
+      };
+    };
+    this.TrimExcess = function () {
+      this.SetCapacity(this.FLength);
+    };
+    this.Sort = function () {
+      $mod.TArrayHelper$G11.Sort$1({p: this, get: function () {
+          return this.p.FItems;
+        }, set: function (v) {
+          this.p.FItems = v;
+        }},this.FComparer,0,this.FLength);
+    };
+    this.Sort$1 = function (AComparer) {
+      $mod.TArrayHelper$G11.Sort$1({p: this, get: function () {
+          return this.p.FItems;
+        }, set: function (v) {
+          this.p.FItems = v;
+        }},AComparer,0,this.FLength);
+    };
+    this.BinarySearch = function (AItem, AIndex) {
+      var Result = false;
+      Result = $mod.TArrayHelper$G11.BinarySearch$1(this.FItems,AItem,AIndex,this.FComparer,0,this.FLength);
+      return Result;
+    };
+    this.BinarySearch$1 = function (AItem, AIndex, AComparer) {
+      var Result = false;
+      Result = $mod.TArrayHelper$G11.BinarySearch$1(this.FItems,AItem,AIndex,AComparer,0,this.FLength);
+      return Result;
+    };
+  },"TList<highScores.Players>");
   $mod.$implcode = function () {
     $mod.$resourcestrings = {SErrDictKeyNotFound: {org: "Key value not found"}, SErrDictDuplicateKey: {org: "Duplicate key value"}};
   };
@@ -79414,15 +80097,32 @@ rtl.module("Generics.Collections",["System","Classes","SysUtils","RTLConsts","Ty
 rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphics","WEBLib.Controls","WEBLib.Forms","WEBLib.Dialogs","DB","WEBLib.DB","WEBLib.IndexedDb","WEBLib.DBCtrls","WEBLib.StdCtrls","WEBLib.Grids","WEBLib.Menus","Generics.Collections"],function () {
   "use strict";
   var $mod = this;
+  rtl.recNewT(this,"Players",function () {
+    this.Score = 0;
+    this.Name = "";
+    this.$eq = function (b) {
+      return (this.Score === b.Score) && (this.Name === b.Name);
+    };
+    this.$assign = function (s) {
+      this.Score = s.Score;
+      this.Name = s.Name;
+      return this;
+    };
+    var $r = $mod.$rtti.$Record("Players",{});
+    $r.addField("Score",rtl.longint);
+    $r.addField("Name",rtl.string);
+  });
   rtl.createClass(this,"TForm3",pas["WEBLib.Forms"].TForm,function () {
     this.$init = function () {
       pas["WEBLib.Forms"].TForm.$init.call(this);
+      this.ListPlayers = null;
       this.WebButton1 = null;
       this.WebLabel1 = null;
       this.WebDBGrid1 = null;
       this.WebButton2 = null;
     };
     this.$final = function () {
+      this.ListPlayers = undefined;
       this.WebButton1 = undefined;
       this.WebLabel1 = undefined;
       this.WebDBGrid1 = undefined;
@@ -79450,20 +80150,14 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
       pas.Unit1.Form1.IndexedDBClientDataSet.Refresh$2();
     };
     this.WebButton2Click = function (Sender) {
-      var playersList = null;
-      var scoreList = [];
-      var score = 0;
-      var firstName = "";
-      var lastName = "";
       var i = 0;
+      this.ListPlayers = pas["Generics.Collections"].TList$G3.$create("Create$1");
       i = 0;
-      playersList = pas.Classes.TStringList.$create("Create$1");
       do {
-        score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
-        firstName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
-        lastName = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("Last_Name").GetAsString();
-        playersList.Add(firstName);
-        scoreList[i] = score;
+        $mod.MyPlayer.Score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
+        $mod.MyPlayer.Name = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
+        this.ListPlayers.Add($mod.MyPlayer);
+        pas.System.Writeln(this.ListPlayers);
         i += 1;
         pas.Unit1.Form1.IndexedDBClientDataSet.Next();
       } while (!pas.Unit1.Form1.IndexedDBClientDataSet.FEOF);
@@ -79603,6 +80297,7 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
     };
     rtl.addIntf(this,pas.System.IUnknown);
     var $r = this.$rtti;
+    $r.addField("ListPlayers",pas["Generics.Collections"].$rtti["TList<highScores.Players>"]);
     $r.addField("WebButton1",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addField("WebLabel1",pas["WEBLib.StdCtrls"].$rtti["TLabel"]);
     $r.addField("WebDBGrid1",pas["WEBLib.DBCtrls"].$rtti["TDBGrid"]);
@@ -79612,6 +80307,7 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
     $r.addMethod("WebButton2Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
   });
   this.Form3 = null;
+  this.MyPlayer = this.Players.$new();
 },["Unit1"]);
 rtl.module("guessform",["System","SysUtils","Variants","Classes","WEBLib.Graphics","WEBLib.Controls","WEBLib.Forms","WEBLib.Dialogs","DB","WEBLib.DB","WEBLib.IndexedDb","WEBLib.StdCtrls","highScores"],function () {
   "use strict";
@@ -80340,6 +81036,22 @@ rtl.module("program",["System","WEBLib.Forms","Unit1","guessform","highScores"],
     pas.System.$rtti["TArray<Classes.TPersistentClass>"].eltype = pas.Classes.$rtti["TPersistentClass"];
     pas.System.$rtti["TArray<Generics.Collections.TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>>"].eltype = pas["Generics.Collections"].$rtti["TPair<Generics.Collections.TDictionary.TKey,Generics.Collections.TDictionary.TValue>"];
     pas.System.$rtti["TArray<Generics.Collections.TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>>"].eltype = pas["Generics.Collections"].$rtti["TPair<Generics.Collections.TObjectDictionary.TKey,Generics.Collections.TObjectDictionary.TValue>"];
+    pas["Generics.Collections"].TEnumerator$G18.$initSpec();
+    pas.System.$rtti["TArray<highScores.Players>"].eltype = pas.highScores.$rtti["Players"];
+    pas["Generics.Collections"].TEnumerable$G17.$initSpec();
+    pas["Generics.Collections"].$rtti["TCollectionNotifyEvent<highScores.Players>"].init();
+    pas["Generics.Defaults"].IComparer$G16.$initSpec();
+    pas["Generics.Collections"].TCustomArrayHelper$G12.$initSpec();
+    pas["Generics.Collections"].TArrayHelper$G11.$initSpec();
+    pas["Generics.Collections"].TCustomList$G10.$initSpec();
+    pas["Generics.Collections"].TCustomListEnumerator$G8.$initSpec();
+    pas["Generics.Defaults"].IEnumerator$G5.$initSpec();
+    pas["Generics.Defaults"].IEnumerable$G4.$initSpec();
+    pas["Generics.Collections"].TList$G3.$initSpec();
+    pas["Generics.Defaults"].$rtti["TOnComparison<highScores.Players>"].init();
+    pas["Generics.Defaults"].TComparer$G6.$initSpec();
+    pas["Generics.Defaults"].TDefaultComparer$G6.$initSpec();
+    pas["Generics.Defaults"].TDelegatedComparerEvents$G6.$initSpec();
   };
   $mod.$main = function () {
     pas["WEBLib.Forms"].Application.Initialize();

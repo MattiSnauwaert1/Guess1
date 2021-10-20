@@ -5,10 +5,16 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, WEBLib.DB, WEBLib.IndexedDb,
-  WEBLib.Controls, WEBLib.DBCtrls, Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Grids, WEBLib.Menus, WEBLib.Grids, generics.collections;
+  WEBLib.Controls, WEBLib.DBCtrls, Vcl.StdCtrls, WEBLib.StdCtrls, Vcl.Grids, WEBLib.Menus, WEBLib.Grids, System.Generics.Collections;
 
 type
+  Players = record
+    Score : Integer;
+    Name : String;
+    end;
+
   TForm3 = class(TForm)
+  ListPlayers : TList <Players>;
     WebButton1: TWebButton;
     WebLabel1: TWebLabel;
     WebDBGrid1: TWebDBGrid;
@@ -25,6 +31,7 @@ type
 
 var
   Form3: TForm3;
+  MyPlayer : Players;
 
 implementation
 
@@ -65,38 +72,32 @@ var
 end;
 
 procedure TForm3.WebButton2Click(Sender: TObject);
-//type
-    //TPlayers = record
-      //score : Integer;
-      //firstName : String;
-      //lastName : String;
-//end;
   
 var
-  //allPlayers : TPlayers;
-  playersList : TStringList;
-  scoreList : array of Integer;
-  score : Integer;
-  firstName: String;
-  lastName : String;
+  
+  //score : Integer;
+  //firstName: String;
   i : Integer;
     
 
 begin    
     begin
+        ListPlayers := TList<Players>.Create;
         //with allPlayers do
         i := 0;
-        playersList := TStringList.Create;
+        
         repeat 
-            score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
-            firstName := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
-            lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
+            MyPlayer.Score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
+            MyPlayer.Name := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
+           // lastName := Form1.IndexedDBClientDataSet.FieldByName('Last_Name').AsString;
 
             // only saves the last player object in the record
             // TPlayers.Add(allPlayers);
             // TPlayers.Insert(allPlayers);
-            playersList.Add(firstName);
-            scoreList[i] := score;
+            
+            ListPlayers.Add(MyPlayer);
+
+            //WriteLn(ListPlayers);
             Inc(i);
             
               Form1.IndexedDBClientDataSet.Next();
