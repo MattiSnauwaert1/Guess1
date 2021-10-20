@@ -80150,30 +80150,53 @@ rtl.module("highScores",["System","SysUtils","Variants","Classes","WEBLib.Graphi
       pas.Unit1.Form1.IndexedDBClientDataSet.Refresh$2();
     };
     this.WebButton2Click = function (Sender) {
+      var score = 0;
+      var firstName = "";
       var i = 0;
-      this.ListPlayers = pas["Generics.Collections"].TList$G3.$create("Create$1");
       i = 0;
+      this.ListPlayers = pas["Generics.Collections"].TList$G3.$create("Create$1");
+      var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+              labels: [],
+              datasets: [{
+              data: [],
+              borderWidth: 1,
+              borderColor:'#00c0ef',
+              label: 'liveCount',
+            }]
+          },
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+          },
+          legend: {
+            display: false
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              }
+            }]
+          }
+        }
+      });
       do {
         $mod.MyPlayer.Score = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("High_Score").GetAsInteger();
         $mod.MyPlayer.Name = pas.Unit1.Form1.IndexedDBClientDataSet.FieldByName("First_Name").GetAsString();
         this.ListPlayers.Add($mod.MyPlayer);
-        pas.System.Writeln(this.ListPlayers);
+        score = $mod.MyPlayer.Score;
+        firstName = $mod.MyPlayer.Name;
+        myChart.data.datasets[0].data.push(score);
+        myChart.data.labels.push(firstName);
         i += 1;
         pas.Unit1.Form1.IndexedDBClientDataSet.Next();
       } while (!pas.Unit1.Form1.IndexedDBClientDataSet.FEOF);
-      var myChart = document.getElementById('myChart').getContext('2d');
-      var massPopChart = new Chart(myChart, {
-          type : 'bar', //type chart
-          data : {
-            labels: playersList ,
-            datasets:[{
-              label : 'Number of Guesses',
-              data : scoreList 
-      
-            }]
-          },
-          options : {}
-      });
+      myChart.update();
     };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);

@@ -14,7 +14,7 @@ type
     end;
 
   TForm3 = class(TForm)
-  ListPlayers : TList <Players>;
+    ListPlayers : TList<Players>;
     WebButton1: TWebButton;
     WebLabel1: TWebLabel;
     WebDBGrid1: TWebDBGrid;
@@ -75,16 +75,51 @@ procedure TForm3.WebButton2Click(Sender: TObject);
   
 var
   
-  //score : Integer;
-  //firstName: String;
+  score : Integer;
+  firstName: String;
   i : Integer;
     
 
-begin    
+begin  
+     i := 0;  
     begin
         ListPlayers := TList<Players>.Create;
         //with allPlayers do
-        i := 0;
+     asm
+        var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+        labels: [],
+        datasets: [{
+        data: [],
+        borderWidth: 1,
+        borderColor:'#00c0ef',
+        label: 'liveCount',
+      }]
+    },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
+      }]
+    }
+  }
+});
+
+     end;  
+        
+
         
         repeat 
             MyPlayer.Score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
@@ -97,30 +132,29 @@ begin
             
             ListPlayers.Add(MyPlayer);
 
-            //WriteLn(ListPlayers);
+            score := MyPlayer.Score;
+            firstName := MyPlayer.Name;
+            
+
+          asm
+            myChart.data.datasets[0].data.push(score);
+            myChart.data.labels.push(firstName);
+            
+          end;
+
+            
             Inc(i);
             
               Form1.IndexedDBClientDataSet.Next();
 
-        until Form1.IndexedDBClientDataSet.EOF
+        until Form1.IndexedDBClientDataSet.EOF;
+
+        asm
+          myChart.update();
+        end;
     end;
 
-    asm
-      var myChart = document.getElementById('myChart').getContext('2d');
-        var massPopChart = new Chart(myChart, {
-            type : 'bar', //type chart
-            data : {
-              labels: playersList ,
-              datasets:[{
-                label : 'Number of Guesses',
-                data : scoreList 
-        
-              }]
-            },
-            options : {}
-        });
-       
-    end;
+    
 end;
 
 
