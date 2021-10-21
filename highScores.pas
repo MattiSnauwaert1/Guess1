@@ -30,6 +30,7 @@ type
   end;
 
 var
+  // Globale variabelen
   Form3: TForm3;
   MyPlayer : Players;
 
@@ -78,10 +79,12 @@ var
 begin  
      i := 0;  
     begin
+        // Creation of the Generic List
         ListPlayers := TList<Players>.Create;
         
      asm
-        var ctx = document.getElementById('myChart').getContext('2d');
+      // Creation of the Chart
+      var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -128,31 +131,37 @@ begin
       }
     }
 });
-     end;      
+     end; 
+        // loop over all objects in the indexeddb     
         repeat 
+            // Store the high score and first name of each object in the players record
             MyPlayer.Score := Form1.IndexedDBClientDataSet.FieldByName('High_Score').AsInteger;
             MyPlayer.Name := Form1.IndexedDBClientDataSet.FieldByName('First_Name').AsString;
             
+            // Add the local player to the Generic List
             ListPlayers.Add(MyPlayer);
 
-            //Save the score and name in local declared variables
+            // Save the score and name in local declared variables
             // These variabeles with their values are pushed to the myChart
             score := MyPlayer.Score;
             firstName := MyPlayer.Name;
             
 
           asm
+            // Push the score and firstName to the chart 
             myChart.data.datasets[0].data.push(score);
             myChart.data.labels.push(firstName);
             
           end;
             Inc(i);
             
+            // Calling the next object in the indexeddb
             Form1.IndexedDBClientDataSet.Next();
-
+        
         until Form1.IndexedDBClientDataSet.EOF;
 
         asm
+          // Update the Chart
           myChart.update();
         end;
     end;
